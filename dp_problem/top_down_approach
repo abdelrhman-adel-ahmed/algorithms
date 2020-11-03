@@ -2,9 +2,11 @@
 /*
  11/3/2020
  https://vjudge.net/contest/404542#problem/E
- solving 
+ solving vjugde problem using top_down approach 
 */
 
+/* running time o(n*c) for constructing the table 
+ o(n) for finding which item we choose */
 
 __________________________________________________
 
