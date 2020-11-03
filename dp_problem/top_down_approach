@@ -1,0 +1,86 @@
+
+/*
+ 11/3/2020
+ https://vjudge.net/contest/404542#problem/E
+ solving 
+*/
+
+
+__________________________________________________
+
+#include <iostream>
+#include<algorithm>
+using namespace std;
+
+int o(int w[],int v[],int n, int c)
+{
+    int t[n+1][c+1]; // for construct the table (top down)
+    for(int i=0;i<c+1;i++)  //fill the first row with zeros
+    {
+        t[0][i]=0;
+    }
+
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=0;j<=c;j++)
+        {
+                if(w[i]>j)
+                {
+                    t[i][j]=t[i-1][j];
+                }
+
+                else
+                {
+                    t[i][j]=max((v[i]+t[i-1][j-w[i]]),t[i-1][j]); //remainig capacity
+                }
+        }
+    }
+    int j=c;
+    int arr[20];
+    int index=0;
+    for(int i=n;i>0;i--)  //get the item we picked 
+    {
+
+            if(t[i][j]>t[i-1][j])
+            {
+                arr[index]=w[i];
+                j=j-w[i];
+                index++;
+            }
+    }
+    for(int i=index-1;i>=0;i--)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return t[n][c];
+
+}
+int main()
+{
+   while(true)
+    {
+        int cap;
+        cin>>cap;
+        int sizee;
+        cin>>sizee;
+        int arr1[sizee+1];
+        arr1[0]=0;  // you need dangling 0 ,why?! think about it
+        for(int i=1;i<=sizee;i++)
+        {
+            cin>>arr1[i];
+
+        }
+        int arr2[sizee+1];
+        arr2[0]=0;
+        for(int i=1;i<=sizee;i++)
+        {
+            arr2[i]=arr1[i];
+
+        }
+        int res=0;
+        res=o(arr1,arr2,sizee,cap);
+        cout<<"sum:"<<res<<endl;
+
+    }
+
+}
