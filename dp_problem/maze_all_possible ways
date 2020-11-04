@@ -1,0 +1,74 @@
+int grid[5][5] = {
+   {1, 1, 1, 1, 0},
+   {1, 1, 0, 1, 0},
+   {0, 1, 1, 1, 0},
+   {0, 0, 0, 1, 0},
+   {1, 1, 1, 1, 1}
+};
+bool visited[5][5]{};
+int R=5;
+int C = 5;
+string path;
+bool valid(int r,int c)
+{
+    //condtion for not exiding the four directions and for being in valid position and for not 
+    //visite what already has been visited(to avoid infinte loop)
+    return r>=0 && c>=0 &&r < R&& c < C&& grid[r][c] != 0 &&!visited[r][c];
+}
+/*
+backtracking:g is a general concept to solve discrete constraint satisfaction problems (CSPs). 
+It uses DFS. Once it's at a point where it's clear that the solution cannot be constructed, 
+it goes back to the last point where there was a choice.This way it iterates all potential solutions
+
+*/
+void maz(int r,int c)
+{
+    if (r==4 &&c==4)
+    {
+        cout << path<<endl;
+    }
+    else
+    {
+        //down
+        if (valid(r+1, c)) //go row down if you can go down(meaning no 0) 
+        {
+            path += 'D';
+            visited[r+1][c] = 1;
+            maz(r + 1, c);
+            path.pop_back(); // go solve it for other direction (going right this time if possible)
+            visited[r + 1][c] = 0;
+        }   
+        //right
+        if (valid(r, c + 1)) //go right if you can go righ(meaning no 0)
+        {
+            path += "R";
+            visited[r][c+1] = 1;
+            maz(r, c + 1);
+            path.pop_back(); //go solve it for the other direction(going down next time if possible)
+            visited[r][c+1] = 0;
+        }
+        //up
+        if (valid(r - 1, c))
+        {
+            path += 'U';
+            visited[r - 1][c] = 1;
+            maz(r - 1, c);
+            path.pop_back(); 
+            visited[r - 1][c] = 0;
+        }
+        //left
+        if (valid(r, c - 1))
+        {
+            path += 'L';
+            visited[r][c-1] = 1;
+            maz(r, c - 1);
+            path.pop_back();
+            visited[r][c - 1] = 0;
+        }
+    }
+}
+
+int main()
+{
+maze(0,0); //stat from 0,0 position
+}
