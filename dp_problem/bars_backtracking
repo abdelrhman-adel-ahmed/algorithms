@@ -1,0 +1,26 @@
+//https://vjudge.net/problem/UVA-12455
+
+/*
+
+Backtracking is a general concept to solve discrete constraint satisfaction problems (CSPs). It uses DFS. 
+Once it's at a point where it's clear that the solution cannot be constructed, it goes back to the last point where there was a choice. 
+This way it iterates all potential solutions
+
+*/
+
+void solve(int pos)
+{
+    if (pos == size) //size of the array meaning we reach last element(base condition)
+    {
+        if (sum == length)cout << "Yes"<<endl;
+        return;
+    }
+    else {
+        sum += q[pos]; // try the current element and go to the next one
+        solve(pos+1); 
+        
+        sum -= q[pos]; //undo the current element and go to the next one
+        solve(pos + 1);
+        
+    }
+}
