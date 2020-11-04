@@ -1,0 +1,32 @@
+
+int R,C; ///row and col of
+int maz[R][C];
+
+bool valid(int r,int c)
+{
+    return r < R&& c < C&& grid[r][c] != 0;
+}
+
+// rate want to go from top left to buttom right
+void maz(int r,int c)
+{
+    if (r==R-1 &&c==C-1) //reach the buttom right corner (where we want to go)
+    {
+        cout << path;
+    }
+    else
+    {
+        if (valid(r+1, c)) //go row down if you can go down(meaning no 0) 
+        {
+            path += 'D';
+            maz(r + 1, c);
+            path.pop_back(); // go solve it for other direction (going right this time if possible)
+        }   
+        if (valid(r, c + 1)) //go right if you can go righ(meaning no 0)
+        {
+            path += "R";
+            maz(r, c + 1);
+            path.pop_back(); //go solve it for the other direction(going down next time if possible)
+        }
+    }
+}
