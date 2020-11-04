@@ -7,10 +7,10 @@ bool valid(int r,int c)
     return r < R&& c < C&& grid[r][c] != 0;
 }
 
-// rate want to go from top left to buttom right
+//point that we want to start from (row,cal)
 void maz(int r,int c)
 {
-    if (r==R-1 &&c==C-1) //reach the buttom right corner (where we want to go)
+    if (r==R-1 &&c==C-1) //reach the buttom right corner (where we want to go,you can chang it as you want by adding new parameter)
     {
         cout << path;
     }
