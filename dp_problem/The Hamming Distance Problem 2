@@ -1,13 +1,14 @@
- 
- int n=4,zeros=2;
- for (int i = 0; i < n; i++) //construct string of lenght 4 and have 2 zeros
+ string s;
+ int n=4,ones=2;
+ for (int i = 0; i < n; i++) //construct string of lenght 4 and have 2 ones
  {
-          if (zeros)
+          if (ones)
           {
-              s += "0"; zeros--;
+              s += "1"; ones--;
           }
-          else s += "1";
+          else s += "0";
 }
+s=string(s.rbegin(),s.rend());
 do
 {
           cout << s << endl;
