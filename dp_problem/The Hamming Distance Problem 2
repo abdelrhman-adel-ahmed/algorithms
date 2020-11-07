@@ -1,0 +1,14 @@
+ 
+ int n=4,zeros=2;
+ for (int i = 0; i < n; i++) //construct string of lenght 4 and have 2 zeros
+ {
+          if (zeros)
+          {
+              s += "0"; zeros--;
+          }
+          else s += "1";
+}
+do
+{
+          cout << s << endl;
+} while (next_permutation(s.begin(), s.end())); //get all permutations of that string
