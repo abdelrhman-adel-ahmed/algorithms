@@ -1,0 +1,63 @@
+
+int board[8];
+void print_board()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+         /*if the colume number is equal to the colume(the index of the arry is represent rows
+            * and the value of each index represent columne in that row)
+            * e.g index 0 have value 4 meaning in row 0 we put the queen at colume 4
+            */
+            if (board[i] == j) 
+                cout << "q ";
+            else cout << "# ";
+        }
+        cout << endl;
+    }
+}
+bool valid(int r,int c)
+{
+    /*check the vertical ,two diagonal on the rows above the row we checking for
+      *e.g first row will not enter this loop will directly return true for the first time 
+     because no row above it */
+    for (int i = 0; i < r; i++)
+    {
+        //if (board[i]==c ||(c-r)==(c-board[i])||(r+i)==(c+board[i]))
+        if (board[i] == c || (c - r) == (board[i] - i) || (c+r) == (board[i]+i))           
+            return false;
+    }
+    return true;
+
+}
+int countt;
+void queen(int r)
+{
+    if (r == 8)
+    {
+        print_board();
+        cout << "---------------------------------------"<<endl;
+        countt++;
+    }   
+    else
+    {
+        for (int col = 0; col < 8; col++)
+        {
+            if (valid(r, col))
+            {
+                //r represent row and the loop here represent each colume in that row 
+                board[r]=col;
+                //go to the next row
+                queen(r + 1);
+            }
+        }
+    }
+
+}
+int main()
+{
+    queen(0);
+    cout << countt;
+    return 0;
+}
