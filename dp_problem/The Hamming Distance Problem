@@ -1,5 +1,5 @@
 string res;
-int n=4, zeros=2;
+int n=4, ones=2;
 /* 
 0011
 0101
@@ -12,7 +12,7 @@ void solve(int pos,int cnt)
 {
     if (pos == n)   
     {
-        if (cnt == zeros)
+        if (cnt == ones)
             cout << res << endl;
     }
     else 
