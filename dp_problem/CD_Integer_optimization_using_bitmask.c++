@@ -13,15 +13,12 @@ void fun(int n, int weight)
         {
             if (mask & (1 << i))
             {
-                if (arr[i] < weight && sum <= weight)
+                sum+=arr[i];
+                res.push_back(arr[i]);
+                 if (sum <= weight && current<sum)
                 {
-                    sum += arr[i];
-                    res.push_back(arr[i]);
-                    if (sum > current && sum <= weight)
-                    {
-                        current = sum;
-                        t = res;
-                    }
+                    t = res;
+                    current = sum;
                 }
             }
         }
