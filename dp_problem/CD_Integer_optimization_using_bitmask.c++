@@ -1,10 +1,9 @@
 //https://vjudge.net/contest/404542#problem/E
 
 int arr[20];
-vector<int> res;
+vector<int> res,t;
 int current ;
 int sum = 0;
-vector<int>t;
 void fun(int n, int weight)
 {
     for (int mask = 0; mask < (1 << n); mask++)
