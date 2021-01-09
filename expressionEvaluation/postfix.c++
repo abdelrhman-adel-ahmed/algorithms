@@ -13,7 +13,7 @@ int PerformOperation(char operation, int operand1, int operand2)
 	if (operation == '+')      return operand1 + operand2;
 	else if (operation == '-') return operand1 - operand2;
 	else if (operation == '*') return operand1 * operand2;
-	
+
 	else if (operation == '/') return operand1 / operand2;
 
 	else cout << "Unexpected Error \n";
@@ -25,14 +25,34 @@ int evaluate(string exp)
 	stack <int>s;
 	for (int i = 0; i < len; i++)
 	{
-		if (isdigit(exp[i]))
+		// Scanning each character from left. 
+		// If character is a delimitter, move on. 
+		if (exp[i] == ' ' || exp[i] == ',') continue;
+
+		else if (isdigit(exp[i]))
 		{
-			int operand=exp[i]-'0';
+			// Extract the numeric operand from the string
+			// Keep incrementing i as long as you are getting a numeric digit. 
+			int operand = 0;
+			while (i < exp.length() && isdigit(exp[i])) {
+				// For a number with more than one digits, as we are scanning from left to right. 
+				// Everytime , we get a digit towards right, we can multiply current total in operand by 10 
+				// and add the new digit. 
+				operand = (operand * 10) + (exp[i] - '0');
+				i++;
+			}
+			// Finally, you will come out of while loop with i set to a non-numeric character or end of string
+			// decrement i because it will be incremented in increment section of loop once again. 
+			// We do not want to skip the non-numeric character by incrementing i twice. 
+			i--;
+
+			// Push operand on stack. 
 			s.push(operand);
 		}
-		else	
+		else
 		{
 			char oper = exp[i];
+			//cout << oper << endl;
 			int temp1 = s.top(); s.pop();
 			int temp2 = s.top(); s.pop();
 			int result = PerformOperation(oper, temp2, temp1);
@@ -45,7 +65,7 @@ int evaluate(string exp)
 }
 int main()
 {
-	string exp = "23*54*+9-";
-	int result=evaluate(exp);
+	string exp = "24,4+14+1+";
+	int result = evaluate(exp);
 	cout << result;
 }
