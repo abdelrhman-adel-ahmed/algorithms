@@ -166,6 +166,9 @@ int main()
 							}
 						}
 					}
+					else{
+						s.push(expr[i])
+					}
 
 				}
 
