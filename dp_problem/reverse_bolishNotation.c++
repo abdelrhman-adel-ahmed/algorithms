@@ -139,7 +139,7 @@ int main()
 					}
 					s.pop();
 				}
-				else if (order(expr[i]) > order(temp))
+				else if (order(expr[i]) >= order(temp))
 				{
 					s.push(expr[i]);
 				}
@@ -148,19 +148,22 @@ int main()
 				{
 					res += s.top();
 					s.pop();
-					temp = s.top();
-					bool flag2 = true;
-					while (flag2)
+					if (!(s.empty()))
 					{
-						if (order(expr[i]) > order(temp) || s.empty())
+						temp = s.top();
+						bool flag2 = true;
+						while (flag2)
 						{
-							s.push(expr[i]);
-							flag2 = false;
-						}
-						else
-						{
-							res += s.top();
-							s.pop();
+							if (order(expr[i]) > order(temp) || s.empty())
+							{
+								s.push(expr[i]);
+								flag2 = false;
+							}
+							else
+							{
+								res += s.top();
+								s.pop();
+							}
 						}
 					}
 
