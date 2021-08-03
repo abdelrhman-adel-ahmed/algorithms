@@ -167,7 +167,7 @@ int main()
 						}
 					}
 					else{
-						s.push(expr[i])
+						s.push(expr[i]);
 					}
 
 				}
