@@ -14,17 +14,12 @@ board = [
 
 def is_valid(grid, row, col, number):
     for i in range(9):
-        try:
-            num = int(grid[row][i])
-        except:
-            num = -1
+        num = grid[row][i]
+
         if num == number:
             return False
     for i in range(9):
-        try:
-            num = int(grid[i][col])
-        except:
-            num = -1
+        num = grid[i][col]
         if num == number:
             return False
     """cell at row 1 col 1 -->corner will be 0,0
@@ -33,10 +28,7 @@ def is_valid(grid, row, col, number):
     corner_col = col - col % 3
     for i in range(3):
         for j in range(3):
-            try:
-                num = int(grid[corner_row + i][corner_col + j])
-            except:
-                num = -1
+            num = grid[corner_row + i][corner_col + j]
             if num == number:
                 return False
     return True
@@ -51,12 +43,14 @@ def solve(grid, row, col):
             return True
         col = 0
         row += 1
+    # if current index not empty solve for next one
     if grid[row][col] != ".":
         return solve(grid, row, col + 1)
 
     for num in range(1, 10):
+        num = str(num)
         if is_valid(grid, row, col, num):
-            grid[row][col] = str(num)
+            grid[row][col] = num
 
             if solve(grid, row, col + 1):
                 return True
